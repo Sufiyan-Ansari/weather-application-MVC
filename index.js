@@ -1,4 +1,17 @@
 const request = require('request');
+const express = require('express');
+const app = express();
+app.set('views','views');
+app.set('view engine' , 'ejs');
+const AdminRouter = require('./route/adminRoute');
+
+app.use(AdminRouter);
+
+
+
+
+
+app.listen(3000);
 
 let apiKey = '030dc4036d149e23bbd7bdf5d4422485';
 //let city = 'karachi';
@@ -18,11 +31,7 @@ request( url  , function (error , response , body)
     }
     else
     {
-        
-        
             let message = `It weather ${weather.main.temp} degrees in ${weather.name}`;
             console.log(message);
-        
-        
     }
 });
