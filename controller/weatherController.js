@@ -1,7 +1,7 @@
 const request = require('request');
 
 exports.getWeatherController = (req,res,next)=>{
-    res.render('weatherView' , {weather:null,error:null});
+    res.render('weatherView' , {pageTitle:'Weather Report ::',weather:null,error:null});
 };
 
 exports.postWeatherController = (req,res,next) =>{
@@ -13,7 +13,7 @@ exports.postWeatherController = (req,res,next) =>{
     request(url,(error,response,body)=>{
         if(error)
         {
-            res.render('weatherView',{weather:null,error:'Error Please try again!'});
+            res.render('weatherView',{pageTitle:'Error ::',weather:null,error:'Error Please try again!'});
 
         }
         else
@@ -21,13 +21,13 @@ exports.postWeatherController = (req,res,next) =>{
             let weather = JSON.parse(body);
             if(weather.main == undefined)
             {
-                res.render('weatherView',{weather : null,error:'Error Please try again!'});
+                res.render('weatherView',{pageTitle:'Error ::',weather : null,error:'Error Please try again!'});
 
             }
             else
             {
                 let weatherText = `Its ${weather.main.temp} degrees in ${weather.name}`;
-                res.render('weatherView',{weather : weatherText,error:null});
+                res.render('weatherView',{pageTitle:`Weather Report:: ${weather.name}`,weather : weatherText,error:null});
             }
         }
     });
